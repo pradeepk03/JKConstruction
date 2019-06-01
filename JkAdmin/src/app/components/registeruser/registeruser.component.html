@@ -1,0 +1,81 @@
+<section>
+<div class="row">
+    <div class="col-md-offset-4 col-md-6">
+  <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Register User</h3>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form role="form" autocomplete="off"  [formGroup]="signupform" (ngSubmit)="onsubmit(signupform.value)">
+        <div class="box-body">
+
+
+
+    <div class="form-group">
+
+        <input type="text" class=" form-control" formControlName="uname" placeholder="Enter login username" autofocus>
+      </div>
+
+      <div *ngIf="signupform.get('uname').hasError('required') && signupform.get('uname').touched">
+        <p style="color:red;">Please provide a name!</p>
+      </div>
+
+      <div class="form-group">
+
+        <input type="password" class=" form-control" formControlName="pwd" placeholder="Password">
+
+      </div>
+
+      <div *ngIf="signupform.get('pwd').hasError('required') && signupform.get('pwd').touched">
+        <p style="color:red;"> Please Enter pwd!</p>
+      </div>
+
+      <div class="form-group">
+
+        <input type="password" class=" form-control" formControlName="cpwd" placeholder="Confirm Password">
+
+      </div>
+      <!-- <div *ngIf="signupform.get('cpwd').hasError('required') && signupform.get('pwd').touched">
+                    Please  Confirm Enter pwd!
+                  </div> -->
+      <div *ngIf="(signupform.get('pwd').value  !=  signupform.get('cpwd').value) && signupform.get('cpwd').touched">
+        <p style="color:red;"> Password & Confirm pass not matching</p>
+      </div>
+
+      <div class="form-group">
+
+        <input type="text" class=" form-control" formControlName="empid" placeholder="Enter employee ID">
+      </div>
+
+      <div *ngIf="signupform.get('empid').hasError('required') && signupform.get('empid').touched">
+        <p style="color:red;">Please Enter Employee id!</p>
+      </div>
+
+      <div >
+        <input formControlName="usertype" type="radio" name="usertype" value="SA" >
+        <label> Super Admin </label> &nbsp;
+        <input formControlName="usertype" type="radio" name="usertype" value="A" >
+        <label>Admin </label> &nbsp;
+
+        <input formControlName="usertype" type="radio" name="usertype"  value="N" >
+        <label> Others </label>
+
+      </div>
+
+  <p style="color: red">{{msg}}</p>
+      <div class=" form-group">
+
+        <button class="btn btn-info form-control"
+          [disabled]=" signupform.invalid || (signupform.get('pwd').value  !==  signupform.get('cpwd').value)">Submit</button>
+
+      </div>
+
+
+
+        </div>
+      </form>
+    </div>
+    </div>
+  </div>
+</section>
