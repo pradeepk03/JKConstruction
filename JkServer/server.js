@@ -4,7 +4,7 @@ const cors = require('cors')
 const path = require('path');
 const bodyparser = require("body-parser");
 const user = require("./User/user")   // Files imported locally
-const emp = require("./User/emp")   // Files imported locally
+const emp = require("./User/emp")   // Files imported locall
 require('dotenv/config');
 const db = require("./db/db") // Files imported locally
 const router = express.Router();
