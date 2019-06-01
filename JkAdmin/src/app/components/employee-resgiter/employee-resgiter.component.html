@@ -1,0 +1,79 @@
+
+<div class="row">
+  <div class="col-md-offset-4 col-md-6">
+<div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Register Employees</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" autocomplete="off"  [formGroup]="emp_regform" (ngSubmit)="onsubmit(emp_regform.value)">
+      <div class="box-body">
+
+          <div class="form-group">
+
+              <input autofocus type="text" class="form-control" formControlName="fname" placeholder="FirstName ">
+          </div>
+
+
+          <div class="form-group">
+
+                  <input type="text" class=" form-control"  formControlName="lname" placeholder="LastName">
+          </div>
+          <div class="form-group">
+
+                  <input type="text" class=" form-control"  formControlName="contactno" placeholder="Enter Contact No">
+
+              </div>
+
+          <div class="form-group">
+
+              <input type="text" class=" form-control" formControlName="empid" placeholder="Enter mployee ID">
+          </div>
+
+          <div class="form-group">
+
+              <input type="text" class=" form-control"  formControlName="aadharno" placeholder="Aadhar No">
+          </div>
+          <div class="form-group">
+
+              <input type="text" class=" form-control"  formControlName="utype" placeholder="Usertype">
+          </div>
+
+          <div class="form-group">
+
+            <input type="text" class=" form-control"  formControlName="site_working" placeholder="Site Working">
+        </div>
+
+
+          <label>Profile Pic</label>
+          <input type="file" class=" form-control" (change)="onfileselected($event)" formControlName="profielpic" placeholder="Profile pic">
+
+        <div class="form-group">
+
+          <input type="text" class=" form-control"   formControlName="address" placeholder="Address">
+      </div>
+
+      <div>{{error}}</div>
+
+        <!-- <div class="form-group">
+          <label for="exampleInputFile">File input</label>
+          <input type="file" id="exampleInputFile">
+
+          <p class="help-block">Example block-level help text here.</p>
+        </div> -->
+        <!-- <div class="checkbox">
+          <label>
+            <input type="checkbox"> Check me out
+          </label>
+        </div> -->
+      </div>
+      <!-- /.box-body -->
+
+      <div class="box-footer">
+        <button [disabled]="emp_regform.invalid" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  </div>
+</div>

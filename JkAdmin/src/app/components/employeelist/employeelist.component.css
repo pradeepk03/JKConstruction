@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.toolbar-search, mat-placeholder {
+  color: white;
+}
+
+.mat-input-underline {
+  background-color: rgb(202, 189, 189);
+}

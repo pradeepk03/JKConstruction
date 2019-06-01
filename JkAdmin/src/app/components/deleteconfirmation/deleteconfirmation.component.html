@@ -1,0 +1,9 @@
+
+<div  mat-dialog-content>
+  <p>Are you sure you want to delete data of {{data.empdata.FirstName}} whose employee id is  {{data.empdata.emp_id}}</p>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onclose()">No Thanks</button>
+  <button mat-button  (click)="deleteemp(data.empdata)" cdkFocusInitial>Ok</button>
+</div>

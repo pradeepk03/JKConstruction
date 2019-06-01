@@ -1,0 +1,138 @@
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+
+
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Employees List</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div>
+
+            <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+              <thead>
+                <tr>
+                  <th>Emp id</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Aadhar No</th>
+                  <th>User type</th>
+                  <th>Contact No</th>
+                  <th>Site Working</th>
+                  <th>Adress</th>
+                  <th>Update</th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let emp of emp">
+                  <td class="sorting_1">{{emp.emp_id}}</td>
+                                            <td>{{emp.FirstName}}</td>
+                                            <td>{{emp.LastName}}</td>
+                                            <td>{{emp.AadharNo}}</td>
+                                            <td>{{emp.usertype}}</td>
+                                            <td>{{emp.contactno}}</td>
+                                            <td>{{emp.site_working}}</td>
+
+                                            <td>{{emp.address}}</td>
+                                            <td><a [routerLink]="['../editemployee/',emp.emp_id]" class="btn btn-app">
+                                                    <i class="fa fa-edit"></i> Edit
+                                                </a></td>
+                </tr>
+              </tbody>
+              </table> -->
+
+              <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Employees">
+              </mat-form-field>
+
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+
+                 <!--Employee Id -->
+                <ng-container matColumnDef="Empid">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Empid </th>
+                  <td mat-cell *matCellDef="let element"> {{element.emp_id}} </td>
+                </ng-container>
+
+                <!-- First name Column -->
+                <ng-container matColumnDef="FirstName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FirstName. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
+                </ng-container>
+
+                <!-- Last Name Column -->
+                <ng-container matColumnDef="LastName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>LastName </th>
+                  <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
+                </ng-container>
+
+                <!-- Aadhar No Column -->
+                <ng-container matColumnDef="AadharNo">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Aadhar NO </th>
+                  <td mat-cell *matCellDef="let element"> {{element.AadharNo}} </td>
+                </ng-container>
+
+                <!-- User Type Column -->
+                <ng-container matColumnDef="usertype">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> User Type </th>
+                  <td mat-cell *matCellDef="let element"> {{element.usertype}} </td>
+                </ng-container>
+
+                  <!-- Contact Column -->
+                  <ng-container matColumnDef="contactno">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact No </th>
+                    <td mat-cell *matCellDef="let element"> {{element.contactno}} </td>
+                  </ng-container>
+
+                 <!-- Site   -->
+                 <ng-container matColumnDef="site_working">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Working </th>
+                  <td mat-cell *matCellDef="let element"> {{element.site_working}} </td>
+                </ng-container>
+
+                  <!-- Adress   -->
+                  <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="edit">
+                      <th mat-header-cell *matHeaderCellDef >  </th>
+                    <td mat-cell *matCellDef="let element"> <a [routerLink]="['../editemployee/',element.emp_id]" >
+                      <i class="fa fa-edit"></i> Edit
+                  </a> </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef >  </th>
+                  <td mat-cell *matCellDef="let element">   <button type="button" (click)="delete(element)" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-remove"></span> Remove
+                  </button></td>
+                </ng-container>
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <mat-paginator [pageSizeOptions]="[5,10, 25, 100]"></mat-paginator>
+
+
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
