@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 const express = require("express");//express module
+=======
+const express = require("express");
+>>>>>>> d54bf78d154d1ac771a6a04296afce5fd27b2ca0
 const mysql = require("mysql");
 const cors = require('cors')
 const path = require('path');
 const bodyparser = require("body-parser");
 const user = require("./User/user")   // Files imported locally
+<<<<<<< HEAD
 const emp = require("./User/emp")   // Files imported 
+=======
+const emp = require("./User/emp")   // Files imported locall
+>>>>>>> d54bf78d154d1ac771a6a04296afce5fd27b2ca0
 require('dotenv/config');
 const db = require("./db/db") // Files imported locally
 const router = express.Router();
