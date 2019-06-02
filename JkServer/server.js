@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("express");//express module
 const mysql = require("mysql");
 const cors = require('cors')
 const path = require('path');
