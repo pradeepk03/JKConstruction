@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-const express = require("express");//express module
-=======
 const express = require("express");
->>>>>>> d54bf78d154d1ac771a6a04296afce5fd27b2ca0
 const mysql = require("mysql");
 const cors = require('cors')
 const path = require('path');
 const bodyparser = require("body-parser");
 const user = require("./User/user")   // Files imported locally
-<<<<<<< HEAD
-const emp = require("./User/emp")   // Files imported 
-=======
-const emp = require("./User/emp")   // Files imported locall
->>>>>>> d54bf78d154d1ac771a6a04296afce5fd27b2ca0
+const emp = require("./User/emp")   // Files imported locally
 require('dotenv/config');
 const db = require("./db/db") // Files imported locally
 const router = express.Router();
@@ -28,7 +20,7 @@ const checkauth = require('./middleware/check-auth') //for hash pwd
 
 //router.use(bodyparser.json());
 //router.use(bodyparser.urlencoded({extended:true}));
-//app.use(bodyparser.json());
+app.use(bodyparser.json());
 
 // using cors for cross origin request
 app.use(cors());
@@ -176,14 +168,8 @@ app.post("/api/saveemployees", function(req, resp) {
  
  app.delete("/api/deleteemp/:id",function(req,resp){
 
-  console.log(req.params.id)
-
-
   try {
       emp.deleteEmp(req.params.id, function(err, data) {
-
-        console.log(JSON.stringify(data))
-
         if (err) {
           resp.status(500).send(err);
         } else {
@@ -269,7 +255,7 @@ app.post("/api/login", function(req, resp) {
             console.log(req.body.username)
 
             if(data[0].username.toLowerCase() != req.body.username.toLowerCase() )
-              return resp.status(401).json({"Msgcode":"101","Msg":"User Details dont match"})
+              return resp.status(401).json({"Msgcode":"101","Msg":"User Not found"})
 
              //create json web token
              const token = jwt.sign({

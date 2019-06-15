@@ -20,7 +20,7 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "employees"
+  database: "jkdatabase"
 });
 
 
