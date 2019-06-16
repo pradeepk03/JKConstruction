@@ -330,12 +330,12 @@ app.get("/api/getempbyid/:id",checkauth, function(req, resp) {
 });
 
 
-app.get("/api/empearnings/:id",checkauth, function(req, resp) {
+app.post("/api/empearnings",checkauth, function(req, resp) {
 
-  
+  console.log(req.body);
   
   try {
-    empsal.getworkdonebyemp(req.params.id, function(err, data) {
+    empsal.getworkdonebyemp(req.body, function(err, data) {
 
       
 
@@ -347,5 +347,28 @@ app.get("/api/empearnings/:id",checkauth, function(req, resp) {
     });
   } catch (error) {}
 });
+
+
+  app.post("/api/add_empearnings", checkauth,function(req, resp) { // Add employee earnings
+
+
+  
+
+    empsal.addempearnings(req.body, function(err, data) {
+      if (err) {
+
+        resp.status(500).send(err);
+      
+      } else {
+
+        resp.status(200).send({"Msgcode":"130","Msg":"Earnings  sucessfully updated"});
+
+      }})
+    //resp.send(req.body); 
+
+});
+
+
+
 
 app.get('/*',(req,res) => res.sendFile(path.join(__dirname,'/dist/JkAdmin/index.html')));
