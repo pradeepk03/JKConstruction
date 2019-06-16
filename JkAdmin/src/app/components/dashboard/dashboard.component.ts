@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { GetemployeelistService } from 'src/app/services/getemployeelist.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,11 +20,11 @@ export class DashboardComponent implements OnInit {
 
   absent = 0;
 
-  constructor(private httpclient: HttpClient) { }
+  constructor(private httpclient: HttpClient,private emplist:GetemployeelistService) { }
 
   ngOnInit() {
 
-    this.httpclient.get(environment.mainurl + 'api/getemp').subscribe((resp) => {
+    this.emplist.getemp().subscribe((resp) => {
       console.log(JSON.stringify(resp));
       this.empdata = resp;
 

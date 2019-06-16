@@ -44,8 +44,7 @@ export class LoginComponent implements OnInit {
 
   onsubmit(data):void{
 
-    console.log("data"+JSON.stringify(data))
-
+   
     let inputdata ={
 
       username:data.username,
@@ -54,6 +53,10 @@ export class LoginComponent implements OnInit {
 
       emp_id:data.empid
     }
+
+    console.log("data"+JSON.stringify(inputdata))
+
+
 
     this.httpclient.post(environment.mainurl +  'api/login', inputdata).subscribe(resp => {
 

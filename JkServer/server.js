@@ -5,6 +5,7 @@ const path = require('path');
 const bodyparser = require("body-parser");
 const user = require("./User/user")   // Files imported locally
 const emp = require("./User/emp")   // Files imported locally
+const empsal = require("./User/emp_salary");
 require('dotenv/config');
 const db = require("./db/db") // Files imported locally
 const router = express.Router();
@@ -45,7 +46,7 @@ app.listen(process.env.PORT, (req,res) => {
 
 //CRUD operations For Employees------>
 
-app.get("/api/getemp", function(req, resp) {
+app.post("/api/getemp", checkauth, function(req, resp) {
 
   
 
@@ -55,6 +56,7 @@ app.get("/api/getemp", function(req, resp) {
       if (err) {
         resp.status(500).send(err);
       } else {
+        
         resp.status(200).send(data);
       }
     });
@@ -64,12 +66,11 @@ app.get("/api/getemp", function(req, resp) {
 
 });
 
-app.get("/api/getempbyid/:id", function(req, resp) {
+app.get("/api/getempbyid",checkauth, function(req, resp) {
 
-  
-  
+ 
   try {
-    emp.getempdetails(req.params.id, function(err, data) {
+    emp.getempdetails(req.params.emp_id, function(err, data) {
 
       
 
@@ -122,7 +123,7 @@ app.post("/api/saveuser", function(req, resp) {
 /*************************************   APi registeration tested  ******************************************************* */
 
 
-app.post("/api/saveemployees", function(req, resp) {
+app.post("/api/saveemployees", checkauth,function(req, resp) {
 
 
   
@@ -142,9 +143,9 @@ app.post("/api/saveemployees", function(req, resp) {
 });
 
 
- app.put("/api/updateemp/:id",function(req,resp){
+ app.put("/api/updateemp/:id",checkauth,function(req,resp){
 
-  console.log("in update emp method"+req.params.id)
+ 
 
   try {
         emp.updateEmp(req.params.id,req.body, function(err, data) {
@@ -166,7 +167,7 @@ app.post("/api/saveemployees", function(req, resp) {
 
  //Delete all employees
  
- app.delete("/api/deleteemp/:id",function(req,resp){
+ app.delete("/api/deleteemp/:id",checkauth,function(req,resp){
 
   try {
       emp.deleteEmp(req.params.id, function(err, data) {
@@ -190,7 +191,7 @@ app.post("/api/saveemployees", function(req, resp) {
 
 ///************************** For all the users crud *********************************** */
 
-app.post("/api/saveuser", function(req, resp) {
+app.post("/api/saveuser", checkauth, function(req, resp) {
 
   
 
@@ -287,7 +288,7 @@ app.post("/api/login", function(req, resp) {
 
 // delete user
 
-app.delete("/api/deleteusers/:id",function(req,resp){
+app.delete("/api/deleteusers/:id",checkauth,function(req,resp){
 
   console.log("in delete users"+req.params.id)
 
@@ -310,6 +311,41 @@ app.delete("/api/deleteusers/:id",function(req,resp){
 
 }) 
 
+app.get("/api/getempbyid/:id",checkauth, function(req, resp) {
 
+  
+  
+  try {
+    emp.getempdetails(req.params.id, function(err, data) {
+
+      
+
+      if (err) {
+        resp.status(500).send(err);
+      } else {
+        resp.status(200).send(data);
+      }
+    });
+  } catch (error) {}
+});
+
+
+app.get("/api/empearnings/:id",checkauth, function(req, resp) {
+
+  
+  
+  try {
+    empsal.getworkdonebyemp(req.params.id, function(err, data) {
+
+      
+
+      if (err) {
+        resp.status(500).send(err);
+      } else {
+        resp.status(200).send(data);
+      }
+    });
+  } catch (error) {}
+});
 
 app.get('/*',(req,res) => res.sendFile(path.join(__dirname,'/dist/JkAdmin/index.html')));

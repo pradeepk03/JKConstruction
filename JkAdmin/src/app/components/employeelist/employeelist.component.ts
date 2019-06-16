@@ -22,7 +22,7 @@ export class EmployeelistComponent implements OnInit {
 public  emp: any;
 dataSource:any;
 
-displayedColumns: string[] = ['FirstName', 'LastName', 'Empid', 'contactno','AadharNo','usertype','site_working','address','edit','delete'];
+displayedColumns: string[] = ['FirstName', 'LastName', 'Empid', 'contactno','AadharNo','usertype','site_working','address','edit','delete','workdone'];
 //  dataSource = new MatTableDataSource<any>(this.emp);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -103,7 +103,12 @@ getemplist(){
 
 }
 
+empworkdetails(){
 
+alert("here")
+
+
+}
 
 
 }

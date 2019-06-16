@@ -13,7 +13,7 @@ export class GetemployeelistService {
 getemp(){
 
 
-  return this.http.get(environment.mainurl + 'api/getemp');
+  return this.http.post(environment.mainurl + 'api/getemp',{});
 }
 
 }

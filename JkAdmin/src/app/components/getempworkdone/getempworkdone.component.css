@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .toolbar-search, mat-placeholder {
+    color: white;
+  }
+  
+  .mat-input-underline {
+    background-color: rgb(202, 189, 189);
+  }
+  
+  .mat-select-content{
+    width:20px;
+    background-color: red;
+    font-size: 10px;
+}

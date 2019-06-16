@@ -8,11 +8,11 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes,CanActivate } from '@angular/router';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { DataTablesModule } from 'angular-datatables';
 
-import { MatTableModule, MatPaginator, MatFormField, MatPaginatorModule, MatFormFieldModule, MatSortHeaderIntl, MatSortModule, MatInputModule, MatProgressSpinnerModule, MatDialogModule } from "@angular/material";
+import { MatTableModule, MatPaginator, MatFormField, MatPaginatorModule, MatFormFieldModule, MatSortHeaderIntl, MatSortModule, MatInputModule, MatProgressSpinnerModule, MatDialogModule , MatSelectModule } from "@angular/material";
 import { AuthguardService as Authguard} from './services/authguard.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HeaderComponent } from './components/header/header.component';
@@ -32,6 +32,8 @@ import { DeleteconfirmationComponent } from './components/deleteconfirmation/del
 import { GetemployeelistService } from './services/getemployeelist.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AddTokenInterceptor } from './services/auth.interceptor';
+import { GetempworkdoneComponent } from './components/getempworkdone/getempworkdone.component';
 
 
 export function jwtTokenGetter() {
@@ -64,6 +66,8 @@ export const appRoutes: Routes = [
 
 
       { path : 'editemployee/:empid',component: EditemployeeComponent},
+
+      { path : 'getempwork/:empid',component: GetempworkdoneComponent},
 
       { path : 'deleteemp/:empid',component: DeleteemployeeComponent},
 
@@ -113,7 +117,8 @@ export const appRoutes: Routes = [
     IndexComponent,
     DeleteemployeeComponent,
     EmployeeResgiterComponent,
-    DeleteconfirmationComponent
+    DeleteconfirmationComponent,
+    GetempworkdoneComponent
 
 
 
@@ -134,6 +139,7 @@ export const appRoutes: Routes = [
     MatInputModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatSelectModule,
     RouterModule.forRoot(
       appRoutes,
       {
@@ -162,7 +168,7 @@ export const appRoutes: Routes = [
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
-  providers: [Authguard,GetemployeelistService],
+  providers: [Authguard,GetemployeelistService,{provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi:true},],
   bootstrap: [AppComponent],
   entryComponents:[DeleteconfirmationComponent]
 })
