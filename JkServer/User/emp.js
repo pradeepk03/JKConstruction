@@ -126,6 +126,8 @@ exports.insertEmpBulk = function(data, callback) {
     'Virar',
     'Nalasopara' ]]
 
+
+    
   pool.getConnection(function(err, con) {
 
     
@@ -145,6 +147,27 @@ exports.insertEmpBulk = function(data, callback) {
   });
 };
 
+exports.insertEmpBulkdata = function(data, callback) {
+
+
+
+pool.getConnection(function(err, con) {
+  // let sql = `insert into employee_data set ?`;
+  //INSERT INTO Test (name, email, n) VALUES ?
+   let query = "INSERT INTO employees_data (name,image,designation,rate,idcard_no,idcard_type,account_no,ifsc_code,account_type,branch_name,joining_date,leaving_date) VALUES ?";
+
+   con.query(query, [data], function(err, data, fields) {
+     if (err) {
+       callback(err);
+     } else {
+       callback(null, data);
+     }
+
+     con.release(); // db release
+   });
+ });
+
+}
 // To get all the employee details
 /*let allusers = function() {
     db.query("SELECT * FROM employee_details ", function(err, result, fields) {

@@ -6,15 +6,33 @@ const bodyparser = require("body-parser");
 const user = require("./User/user")   // Files imported locally
 const emp = require("./User/emp")   // Files imported locally
 const empsal = require("./User/emp_salary");
+//const pool = require("../db/db");
 require('dotenv/config');
 const db = require("./db/db") // Files imported locally
 const router = express.Router();
 const app = express();//Express code
+const fs = require('fs');
 const bcrypt = require('bcrypt');
 const salt = 10;
 const jwt = require('jsonwebtoken');
 const checkauth = require('./middleware/check-auth') //for hash pwd
+const csv = require('fast-csv');
 
+var multer = require('multer');
+var Storage = multer.diskStorage({
+  // destination
+  destination: function (req, file, cb) {
+    cb(null, process.env.imagepath)
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+
+
+
+var upload = multer({ storage: Storage })
 
 
 
@@ -370,5 +388,46 @@ app.post("/api/empearnings",checkauth, function(req, resp) {
 
 
 
+app.get('/api/parsecsv',(req,resp)=>{
+
+  let stream = fs.createReadStream(process.env.employeecsv_path); 
+ let count=1;
+  let myArray = [];
+  let csvStream = csv
+    .parse()
+  
+    .on("data", (data) => {
+      count+=1;
+      myArray.push(data);
+    })
+  
+    .on("end", () => {
+      myArray.shift();
+      console.log(count)
+
+      emp.insertEmpBulkdata(myArray,(err,data)=>{
+
+
+        if(err){
+
+          resp.status(500).send(err);
+        }
+        else{
+
+          resp.status(200).send({"Msg":count +"  No of Data Inserted Sucessfully "});
+
+
+        }})
+
+
+      })
+
+
+      stream.pipe(csvStream);
+
+    });
+  
+  
+  
 
 app.get('/*',(req,res) => res.sendFile(path.join(__dirname,'/dist/JkAdmin/index.html')));
